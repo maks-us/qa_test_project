@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Comparison Slider</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Image Comparison Slider</h1>
+
+        <div class="comparison-slider" id="comparisonSlider">
+            <!-- First (top layer) image - Matrix -->
+            <img src="{{ url_for('static', filename='images/matrix.png') }}"
+                 alt="Matrix digital effect" class="comparison-img first-img">
+
+            <!-- Second (bottom layer) image - Park -->
+            <img src="{{ url_for('static', filename='images/park.png') }}"
+                 alt="Park scene" class="comparison-img second-img">
+
+            <!-- Vertical slider -->
+            <div class="slider-handle" id="sliderHandle">
+                <div class="slider-arrow left"></div>
+                <div class="slider-arrow right"></div>
+            </div>
+        </div>
+
+        <p class="info">Drag the slider left and right to compare the images</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/slider.js') }}"></script>
+</body>
+</html>
