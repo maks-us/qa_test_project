@@ -76,12 +76,20 @@ lint-flake:
 lint-pylint:
     uv run pylint app.py
 
+# Type check with mypy
+type-check:
+    uv run mypy app.py
+
+# Security scan with bandit
+security:
+    uv run bandit -r app.py
+
 # Run all code quality checks
-lint: fmt sort lint-flake lint-pylint
+lint: fmt sort lint-flake lint-pylint type-check security
     @echo "✓ All code quality checks passed"
 
 # Check without modifying
-lint-check: fmt-check sort-check lint-flake lint-pylint
+lint-check: fmt-check sort-check lint-flake lint-pylint type-check security
     @echo "✓ All code quality checks passed"
 
 # Docker
@@ -155,10 +163,12 @@ help:
     @echo "  just test-cov      - Run tests with coverage"
     @echo ""
     @echo "Code Quality:"
-    @echo "  just lint          - Run all linters (and fix)"
+    @echo "  just lint          - Run all checks (and fix)"
     @echo "  just lint-check    - Check without fixing"
     @echo "  just fmt           - Format code"
     @echo "  just sort          - Sort imports"
+    @echo "  just type-check    - Type checking with mypy"
+    @echo "  just security      - Security scan with bandit"
     @echo ""
     @echo "Docker:"
     @echo "  just docker-up     - Run with Docker Compose"

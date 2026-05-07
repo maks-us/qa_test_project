@@ -123,8 +123,24 @@ uv run flake8 app.py
 # Lint with pylint
 uv run pylint app.py
 
+# Type check with mypy
+uv run mypy app.py
+
+# Security scan with bandit
+uv run bandit -r app.py
+
 # Run all checks
-uv run black . && uv run isort . && uv run flake8 app.py && uv run pylint app.py
+just lint
+```
+
+**Or using Just (recommended):**
+```bash
+just fmt        # Format code
+just sort       # Sort imports
+just type-check # Type checking
+just security   # Security scanning
+just lint-check # Check all without modifying
+just lint       # Fix all and check
 ```
 
 **Pre-commit hooks:**
@@ -164,6 +180,25 @@ qa_test_project/
     ├── __init__.py
     └── test_app.py             # Unit tests
 ```
+
+## CI/CD Pipeline
+
+GitHub Actions automatically runs quality checks on every push and pull request:
+
+**Workflows:**
+- **CI** (`.github/workflows/ci.yml`): Tests, linting, type checking, and security scans
+- **Docker** (`.github/workflows/docker.yml`): Docker image build and smoke test
+
+**What runs on every PR:**
+- ✅ Code formatting (Black, isort)
+- ✅ Code style (Flake8)
+- ✅ Linting (Pylint)
+- ✅ Type checking (mypy)
+- ✅ Security scanning (Bandit)
+- ✅ Unit tests with coverage
+- ✅ Docker build test
+
+All checks must pass before merging. View results in the **Actions** tab on GitHub.
 
 ## Available Commands
 

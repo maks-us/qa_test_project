@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -9,4 +11,5 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=5001, debug=True)
+    debug_mode = os.getenv("FLASK_ENV") == "development"
+    app.run(host="localhost", port=5001, debug=debug_mode)
